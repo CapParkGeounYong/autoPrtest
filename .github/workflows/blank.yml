@@ -1,12 +1,10 @@
 name: CI
 
 on:
-  # Triggers the workflow on push events to the "feature" branch
   push:
     branches:
       - feature
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -26,13 +24,20 @@ jobs:
     needs: build
     steps:
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: actions/github-script@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Automated Pull Request
-          title: Automated Pull Request
-          body: |
-            This is an automated pull request created by GitHub Actions.
-            Please review and merge if everything looks good.
-          branch: feature
-          base: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = "Automated Pull Request";
+            const body = "This is an automated pull request created by GitHub Actions.\nPlease review and merge if everything looks good.";
+            const head = "feature";
+            const base = "main";
+            const { data } = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              head,
+              base
+            });
+            console.log(`Pull Request created: ${data.html_url}`);
