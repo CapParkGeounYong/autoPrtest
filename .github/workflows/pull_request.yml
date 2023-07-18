@@ -16,7 +16,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.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 }}
           commit-message: "Merge from feature branch"
           title: "Merge from feature branch"
           body: "Automatically generated Pull Request from feature branch to main"
