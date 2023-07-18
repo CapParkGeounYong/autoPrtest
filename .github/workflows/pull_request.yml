@@ -1,9 +1,9 @@
-name: Create PR from feature branch to main
+ name: Create PR from feature branch to main
 
 on:
   push:
     branches:
-      - feature
+      - *
 
 jobs:
   create-pr:
@@ -12,12 +12,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: extract git commit data
+	uses: rlespinasse/git-commit-data-action@v1.x
+      - name: update author information
+	run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.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 }}
-          commit-message: "Merge from feature branch"
-          title: "Merge from feature branch"
-          body: "Automatically generated Pull Request from feature branch to main"
-          branch: "main"
+	  branch: "auto-pr-branch"
+	  base: main
+	  tiltle: "demo for auto pr"
+	  committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+	  author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+	  body:
+		this is to show auto pr
+	  token: ${{ secrets.GITHUB_TOKEN }}
+	  delete-branch: true
