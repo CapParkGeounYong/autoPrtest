@@ -61,3 +61,44 @@ components:
       type: apiKey
       in: header
       name: X-API-Key
+      components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Keycomponents:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Keycomponents:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Keycomponents:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Keycomponents:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Keycomponents:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Keycomponents:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Keycomponents:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
