@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  # Triggers the workflow on push events to the "feature" branch
+  push:
+    branches:
+      - feature
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+
+  create_pull_request:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Automated Pull Request
+          title: Automated Pull Request
+          body: |
+            This is an automated pull request created by GitHub Actions.
+            Please review and merge if everything looks good.
+          branch: feature
+          base: main
