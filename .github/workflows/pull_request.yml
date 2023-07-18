@@ -1,9 +1,7 @@
- name: Create PR from feature branch to main
-
 on:
   push:
     branches:
-      - *
+      - main
 
 jobs:
   create-pr:
@@ -12,20 +10,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: extract git commit data
-	uses: rlespinasse/git-commit-data-action@v1.x
+        uses: rlespinasse/git-commit-data-action@v1.x
+
       - name: update author information
-	run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-	  branch: "auto-pr-branch"
-	  base: main
-	  tiltle: "demo for auto pr"
-	  committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-	  author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-	  body:
-		this is to show auto pr
-	  token: ${{ secrets.GITHUB_TOKEN }}
-	  delete-branch: true
+          branch: "auto-pr-branch"
+          base: main
+          title: "demo for auto pr"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
+          body: |
+            this is to show auto pr
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
