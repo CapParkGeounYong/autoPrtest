@@ -3,7 +3,7 @@ name: Auto PR to main
 on:
   push:
     branches:
-      - "feature*"
+      - '*'
 
 jobs:
   create-pr:
@@ -13,13 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Debug - Show Git Status
+        run: git status
+
+      - name: Debug - Show Git Remote URLs
+        run: git remote -v
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: "*"
-          base: master
+          branch: master
           title: Automatic PR from ${{ github.ref }}
           body: |
             This PR was automatically generated from the ${{ github.ref }} branch.
             Commit message: ${{ github.event.head_commit.message }}
-          Token: ${{ secrets.GITHUB_TOKEN }}
