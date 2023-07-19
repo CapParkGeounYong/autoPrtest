@@ -3,7 +3,7 @@ name: Auto PR to main
 on:
   push:
     branches:
-      - '*'
+      - master
 
 jobs:
   create-pr:
@@ -16,8 +16,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: master
+          branch: "*"
+          base: master
           title: Automatic PR from ${{ github.ref }}
           body: |
             This PR was automatically generated from the ${{ github.ref }} branch.
             Commit message: ${{ github.event.head_commit.message }}
+          Token: ${{ secrets.GITHUB_TOKEN }}
