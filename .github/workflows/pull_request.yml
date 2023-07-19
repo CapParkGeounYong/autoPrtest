@@ -21,8 +21,7 @@ jobs:
       - name: Raise PR
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: "feature*"
-          base: master
+          branch: "master"
           title: "demo"
           committer: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
           author: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
