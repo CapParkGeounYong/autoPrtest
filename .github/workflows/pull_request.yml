@@ -1,9 +1,7 @@
-# File: .github/workflows/pull-request.yml
-
 on:
   push:
     branches:
-    - "feature*"
+    - "feature*"  # Support wildcard matching
 
 jobs:
   pull-request:
@@ -13,4 +11,8 @@ jobs:
     - name: pull-request
     uses: diillson/auto-pull-request@latest
       with:
-        destination_branch: "master"
+        source_branch: ""                                 # If blank, default: triggered branch
+        destination_branch: "master"                      # If blank, default: master
+        pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
+        pr_body: |                                        # Full markdown support, requires pr_title
+          :crown: *An automated PR*
