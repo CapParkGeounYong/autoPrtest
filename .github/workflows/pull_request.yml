@@ -6,7 +6,7 @@ on:
       - '*'
 
 env:
-  BRANCH_NAME: ${{ github.head_ref }}
+  BRANCH_NAME: master
 
 jobs:
   create-pr:
