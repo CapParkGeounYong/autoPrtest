@@ -1,26 +1,24 @@
-name: Auto PR to master
-
+name: Auto Pull Request
 on:
   push:
-    branches:
-      - '*'
-
-env:
-  BRANCH_NAME: master
-
+    branches-ignore:
+      - master  # Add any branch name you want to exclude from triggering auto PRs
 jobs:
-  create-pr:
+  create_pr:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Create Pull Request
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Git
         run: |
-          PAYLOAD=$(cat <<EOF
-            {
-              "title": "Title of my PR",
-              "body": "Automated PR to ...",
-              "head": "${BRANCH_NAME}",
-              "base": "master"
-            }
-          EOF
-          )
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Automated Pull Request"
+          title: "Auto-generated PR from push to ${{ github.ref }}"
+          body: "This PR was automatically created when pushing to the ${{ github.ref }} branch."
