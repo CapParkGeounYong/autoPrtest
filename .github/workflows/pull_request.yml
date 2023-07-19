@@ -1,18 +1,20 @@
+name: Auto Pull Request
+
 on:
   push:
     branches:
-    - "feature*"  # Support wildcard matching
+      - "feature*"  # Support wildcard matching
 
 jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: pull-request
-    uses: diillson/auto-pull-request@latest
-      with:
-        source_branch: ""                                 # If blank, default: triggered branch
-        destination_branch: "master"                      # If blank, default: master
-        pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
-        pr_body: |                                        # Full markdown support, requires pr_title
-          :crown: *An automated PR*
+      - uses: actions/checkout@v3
+      - name: Pull Request
+        uses: diillson/auto-pull-request@latest
+        with:
+          source_branch: ${{ github.ref }}              # Use the triggered branch as the source
+          destination_branch: "master"                  # If blank, default: master
+          pr_title: "Pulling ${{ github.ref }} into master"  # Title of the pull request
+          pr_body: |
+            :crown: *An automated PR*                   # Body of the pull request
