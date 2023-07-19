@@ -28,4 +28,11 @@ jobs:
           author: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
           body: |
             This is to show automatic pr
+            
           token: ${{ secrets.GITHUB_TOKEN }}
+                   - name: Debug Git
+                   run: |
+                     git --version
+                     git status
+                     git remote -v
+                     # Add more git commands to debug the issue
