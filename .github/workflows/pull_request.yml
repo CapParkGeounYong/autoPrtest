@@ -1,4 +1,4 @@
-name: Auto PR to main
+name: Auto PR to master
 
 on:
   push:
@@ -12,3 +12,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: master
+          title: Automatic PR from 
+          body: |
+            This PR was automatically generated from 
