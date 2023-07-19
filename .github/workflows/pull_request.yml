@@ -17,6 +17,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           branch: master
-          title: Automatic PR from 
+          title: Automatic PR from ${{ github.ref }}
           body: |
-            This PR was automatically generated from 
+            This PR was automatically generated from the ${{ github.ref }} branch.
+            Commit message: ${{ github.event.head_commit.message }}
