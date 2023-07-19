@@ -18,6 +18,6 @@ jobs:
           pr_title: "Pulling ${{ github.ref }} into master"  # Title of the pull request
           pr_body: |
             :crown: *An automated PR*                   # Body of the pull request
-          github_token: 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
+          github_token: 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
         env:
-          GH_TOKEN: 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  # Use the ACCESS_TOKEN secret as the value f
+          GH_TOKEN: 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  # Use the ACCESS_TOKEN secret as the value f
