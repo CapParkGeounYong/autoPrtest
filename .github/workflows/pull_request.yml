@@ -3,17 +3,17 @@ name: Auto Pull Request
 on:
   push:
     branches:
-    - "feature*"  
+      - "feature*"
 
 jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: pull-request
-    uses: diillson/auto-pull-request@latest
-      with:
-        destination_branch: "master"
-
-
-    
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          destination_branch: "master"
+          title: "Automated Pull Request"
+          body: "This is an automated pull request from the feature branch."
