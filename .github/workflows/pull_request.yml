@@ -9,15 +9,23 @@ jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Pull Request
-        uses: diillson/auto-pull-request@latest
+      - name: checking out code
+        uses: actions/checkout@v2
+
+      - name: extract git commit data
+        uses: rlespinasse/git-commit-data-action@v1
+
+      - name: Update author information
+        run: echo "${GIT_COMMIT_AUTHOR_NAME}" > AUTHOR
+
+      - name: Raise PR
+        uses: peter-evans/create-pull-request@v5
         with:
-          source_branch: ${{ github.ref }}              # Use the triggered branch as the source
-          destination_branch: "master"                  # If blank, default: master
-          pr_title: "Pulling ${{ github.ref }} into master"  # Title of the pull request
-          pr_body: |
-            :crown: *An automated PR*                   # Body of the pull request
-          github_token: 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
-        env:
-          GH_TOKEN: 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
+          branch: "feature*"
+          base: master
+          title: "demo"
+          committer: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
+          author: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
+          body: |
+            This is to show automatic pr
+          token: ${{ secrets.GITHUB_TOKEN }}
