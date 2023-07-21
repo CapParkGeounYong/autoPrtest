@@ -9,7 +9,24 @@ jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
+      - name: checking out code
+        uses: actions/checkout@v2
+
       - name: Show AUTHOR content
         run: cat AUTHOR
 
+      - name: extract git commit data
+        uses: rlespinasse/git-commit-data-action@v1
 
+      - name: Update author information
+        run: echo "${GIT_COMMIT_AUTHOR_EMAIL}" > AUTHOR
+
+      - name: Raise PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: "master"
+          title: "demo"
+          committer: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
+          author: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
+          body: |
+            This is to show automatic pr
