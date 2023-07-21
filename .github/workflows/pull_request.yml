@@ -9,6 +9,9 @@ jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
+      - name: Show AUTHOR content
+        run: cat AUTHOR
+
       - name: checking out code
         uses: actions/checkout@v2
 
@@ -18,14 +21,11 @@ jobs:
       - name: Update author information
         run: echo "${GIT_COMMIT_MESSAGE_SUBJECT}" > AUTHOR
 
-      - name: Show AUTHOR content
-        run: cat AUTHOR
-
       - name: Raise PR
         uses: peter-evans/create-pull-request@v5
         with:
           branch: "master"
-          title: "egrr"
+          title: "err"
           committer: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
           author: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
           body: |
