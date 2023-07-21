@@ -22,8 +22,6 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           branch: "master"
-          title: "demo"
-          committer: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
-          author: "${GIT_COMMIT_AUTHOR_NAME} <${GIT_COMMIT_AUTHOR_EMAIL}>"
+          title: "hi"
           body: |
             This is to show automatic pr
