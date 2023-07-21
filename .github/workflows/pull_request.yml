@@ -9,11 +9,11 @@ jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Show AUTHOR content
-        run: cat AUTHOR
-
       - name: checking out code
         uses: actions/checkout@v2
+
+      - name: Show AUTHOR content
+        run: cat AUTHOR
 
       - name: extract git commit data
         uses: rlespinasse/git-commit-data-action@v1
